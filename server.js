@@ -17,7 +17,7 @@ export default function runServer(handlers) {
   app.post("/move", (req, res) => {
     res.send(handlers.move(req.body));
   });
-
+// test commit 2
   app.post("/end", (req, res) => {
     handlers.end(req.body);
     res.send("ok");
