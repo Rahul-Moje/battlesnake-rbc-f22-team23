@@ -13,11 +13,20 @@ export default function runServer(handlers) {
     res.send("ok");
   });
 
-  //Testing commit
+
   app.post("/move", (req, res) => {
+    // Step 1: Generate moves that don't hit a wall or obstacles (arr1)
+    // Step 2: Generate moves that don't hit another snake (arr2)
+    // Step 3: Generate moves that don't hit yourself (arr3)
+    // Step 4: Generate moves that go towards the closest food item (arr4)
+    // Step 5: Find moves in all of arr1, arr2, and arr3 (arr5)
+    // Step 6: Find moves that are all in arr5 and arr4 (arr6)
+    // Step 6a: If arr6 is not empty, randomly choose a move in arr6
+    // Step 6b: Else choose any move in arr 5
+    //API Reference - https://docs.battlesnake.com/api
     res.send(handlers.move(req.body));
   });
-// test commit 2
+
   app.post("/end", (req, res) => {
     handlers.end(req.body);
     res.send("ok");
