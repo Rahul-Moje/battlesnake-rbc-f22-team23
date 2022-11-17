@@ -13,6 +13,7 @@ export default function runServer(handlers) {
     res.send("ok");
   });
 
+  //Testing commit
   app.post("/move", (req, res) => {
     res.send(handlers.move(req.body));
   });
@@ -31,7 +32,6 @@ export default function runServer(handlers) {
   const port = process.env.PORT || 8000;
 
   app.listen(port, host, () => {
-   // hello 
     console.log(`Running Battlesnake at http://${host}:${port}...`)
   });
 }
