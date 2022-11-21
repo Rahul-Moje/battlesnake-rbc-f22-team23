@@ -77,6 +77,15 @@ function move(gameState) {
   // opponents = gameState.board.snakes;
 
   // Are there any safe moves left?
+  var wallMoves = findSafeMovesForWallsOrObstacles(gameState.board, gameState.you)
+  const keys = Object.keys(wallMoves);
+  for(let i=0; i<keys.length; i++) {
+    const key = keys[i];
+    console.log(key, wallMoves[key]);
+    if(wallMoves[key] == false) {
+      isMoveSafe[key] = false;
+    }
+  }
   const safeMoves = Object.keys(isMoveSafe).filter(key => isMoveSafe[key]);
   if (safeMoves.length == 0) {
     console.log(`MOVE ${gameState.turn}: No safe moves detected! Moving down`);
@@ -90,7 +99,32 @@ function move(gameState) {
   // food = gameState.board.food;
 
   console.log(`MOVE ${gameState.turn}: ${nextMove}`)
+  
   return { move: nextMove };
+}
+
+function findSafeMovesForWallsOrObstacles(board, snake) {
+  var result = {
+    up: false,
+    down: false,
+    left: false,
+    right: false
+  };
+  var boardXMin = 0, boardXMax = board.width - 1;
+  var boardYMin = 0, boardYMax = board.height - 1;
+  if (snake.head.x != boardXMin) {
+    result.left = true;
+  }
+  if (snake.head.x != boardXMax) {
+    result.right = true;
+  }
+  if (snake.head.y != boardYMax) {
+    result.up = true;
+  }
+  if (snake.head.y != boardYMin) {
+    result.down = true;
+  }
+  return result
 }
 
 runServer({

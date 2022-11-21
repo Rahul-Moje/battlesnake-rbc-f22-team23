@@ -24,14 +24,7 @@ export default function runServer(handlers) {
     // Step 6a: If arr6 is not empty, randomly choose a move in arr6
     // Step 6b: Else choose any move in arr 5
     //API Reference - https://docs.battlesnake.com/api
-    //console.log(req.body);
-    var safeWallMoves = findSafeMovesForWallsOrObstacles(req.body.board, req.body.you);
-    var safeMove = 'down';
-    if(safeWallMoves.length != 0) {
-      safeMove = safeWallMoves[Math.floor(Math.random()*safeWallMoves.length)]
-    }
-    console.log('Next move', safeMove);
-    return { move: safeMove }
+    return res.send(handlers.move(req.body))
   });
 
   app.post("/end", (req, res) => {
@@ -52,7 +45,7 @@ export default function runServer(handlers) {
   });
 }
 
-export function findSafeMovesForWallsOrObstacles(board, snake) {
+/*export function findSafeMovesForWallsOrObstacles(board, snake) {
   var result = []
   var boardXMin = 0, boardXMax = board.width - 1;
   var boardYMin = 0, boardYMax = board.height - 1;
@@ -70,4 +63,4 @@ export function findSafeMovesForWallsOrObstacles(board, snake) {
   }
   console.log(result);
   return result
-}
+}*/
